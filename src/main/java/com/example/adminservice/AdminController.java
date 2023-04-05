@@ -30,7 +30,7 @@ public class AdminController {
     public String connect(){
         RestTemplate restTemplate = new RestTemplate();
 
-        String uri = "http://localhost:8080/api/user-service/"; // or any other uri
+        String uri = "http://user-service:8080/api/user-service/"; // or any other uri
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
