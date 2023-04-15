@@ -27,13 +27,13 @@ public class AdminController {
 
     @GetMapping("/")
     public String getDefault(){
-        return "Hello from Admin Service - " + getAddress() ;
+        return "Hello from Admin Service - ";
     }
 
 
     @GetMapping("/admins")
     public String getHello(){
-        return "I have 5 admins - " +  getAddress() ;
+        return "I have 5 admins - ";
     }
 
     @GetMapping("/env")
@@ -57,12 +57,5 @@ public class AdminController {
         return (String)  "Response from User service : " + result.getBody() ;
     }
 
-    public String getAddress(){
-        try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress("google.com", 80));
-            return socket.getLocalAddress().getHostAddress();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }
