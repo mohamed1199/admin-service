@@ -61,7 +61,7 @@ public class AdminController {
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<?> result =
                 restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        return (String)  "Response from user-service" ;
+        return (String)  "Response from user-service : "+result.getBody().toString() ;
     }
 
 
