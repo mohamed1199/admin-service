@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -25,36 +26,42 @@ public class AdminController {
     @Value("${USER_SERVICE_ENDPOINT}")
     private String userServiceEndpoint ;
 
-    @GetMapping("/")
-    public String getDefault(){
-        return "Hello from Admin Service - ";
-    }
+    @Value("${DATABASE_ENDPOINT}")
+    private String databaseEndpoint ;
 
+    @Value("${KAFKA_ENDPOINT}")
+    private String kafkaEndpoint ;
+
+    @GetMapping("/hello")
+    public String getDefault(){
+        return "Hello from Admin Service";
+    }
 
     @GetMapping("/admins")
     public String getHello(){
-        return "I have 5 admins - ";
+        return "I have 5 admins";
     }
 
-    @GetMapping("/env")
+    @GetMapping("/envs")
     public String getEnvVars(){
-        return "user service endpoint is " + userServiceEndpoint ;
+        Map<String, String> myMap = new HashMap<>();
+        myMap.put("USER_SERVICE_ENDPOINT",userServiceEndpoint.toString());
+        myMap.put("DATABASE_ENDPOINT",databaseEndpoint.toString());
+        myMap.put("KAFKA_ENDPOINT",kafkaEndpoint.toString());
+        return myMap.toString() ;
     }
 
     @GetMapping("/connect")
-    public String connect(){
+    public String getConnect(){
         RestTemplate restTemplate = new RestTemplate();
-
-        String uri = "http://"+ userServiceEndpoint + "/api/user-service/";
-
+        String uri = "http://"+ userServiceEndpoint + "/api/user-service/hello";
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<?> result =
                 restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        return (String)  "Response from User service : " + result.getBody() ;
+        return (String)  "Response from user-service" ;
     }
 
 
