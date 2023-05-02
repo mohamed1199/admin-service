@@ -34,7 +34,7 @@ public class AdminController {
 
     @GetMapping("/hello")
     public String getDefault(){
-        return "Hello from Admin Service";
+        return "Hello from Admin Service - V1.0.0.0";
     }
 
     @GetMapping("/admins")
