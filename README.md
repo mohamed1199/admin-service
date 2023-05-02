@@ -1,4 +1,4 @@
-## This microservice belong to the following architecture
+## This microservice is belong to the following architecture
 
 ![Alt text](images/arch.png?raw=true "Optional Title")
 
